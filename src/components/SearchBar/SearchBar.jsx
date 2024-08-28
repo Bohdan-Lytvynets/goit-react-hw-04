@@ -1,40 +1,39 @@
-import css from "./SearchBar.module.css";
-import { CiSearch } from "react-icons/ci";
-import toast from "react-hot-toast";
+import { useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
+import css from './SearchBar.module.css'
 
-export const SearchBar = ({ onSearch }) => {
-  const handleSearch = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const search = form.elements.search.value;
-    console.log("search", search);
-    
+const SearchBar = ({ onSearch }) => {
+  const [query, setQuery] = useState('');
 
-    if (search.trim() === "") {
-      toast.error("Enter text to search for images.");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (query.trim() === '') {
+      toast.error("Please enter a search query.");
+      return;
     }
-    onSearch (search);
-    form.reset();
+    onSearch(query);
+    setQuery('');
   };
 
   return (
-    <header className={css.searchbar}>
-      <form className={css.searchForm} onSubmit={handleSearch}>
-        <button type="submit">
-          {" "}
-          <CiSearch width="22" height="22" className="searchFormButton" />{" "}
-        </button>
-        <input
-          name="search"
+    <header className={css.header}>
+      <form className={css.searchForm} onSubmit={handleSubmit}>
+        <input className={css.searchInput}
           type="text"
-          className={css.searchFormInput}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
           autoComplete="off"
           autoFocus
           placeholder="Search images and photos"
         />
+        <button className={css.searchButton} type="submit">Search</button>
+        <Toaster />
       </form>
     </header>
   );
 };
 
 export default SearchBar;
+
+
+
