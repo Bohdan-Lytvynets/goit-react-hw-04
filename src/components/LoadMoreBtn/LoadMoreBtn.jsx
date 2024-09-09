@@ -1,7 +1,7 @@
-import css from './LoadMoreBtn.module.css'
-const LoadMoreBtn = ({ onClick }) => {
+import css from "./LoadMoreBtn.module.css";
+const LoadMoreBtn = ({ handleLoadMoreClick }) => {
   return (
-    <button className={css.loardMoreButton}  onClick={onClick} style={{ margin: '20px auto', display: 'block' }}>
+    <button className={css.loadBtn} type="button" onClick={handleLoadMoreClick}>
       Load more
     </button>
   );

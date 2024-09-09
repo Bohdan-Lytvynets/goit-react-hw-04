@@ -1,9 +1,6 @@
+import css from "./ErrorMessage.module.css";
 const ErrorMessage = ({ message }) => {
-  return (
-    <div style={{ color: 'red', textAlign: 'center', marginTop: '20px' }}>
-      <p>Error: {message}</p>
-    </div>
-  );
+  return <div className={css.error}>{message}</div>;
 };
 
 export default ErrorMessage;

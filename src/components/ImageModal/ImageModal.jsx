@@ -1,48 +1,25 @@
-import css from './ImageModal.module.css'
-import Modal from 'react-modal';
+import Modal from "react-modal";
+import css from "./ImageModal.module.css";
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    padding: '20px',
-    border: 'none',
-    background: '#1e1e1e',
-    maxWidth: '90%', 
-    maxHeight: '90%',
-  },
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.75)',
-  },
-};
+Modal.setAppElement("#root");
 
-Modal.setAppElement('#root'); 
-
-const ImageModal = ({ isOpen, onRequestClose, image }) => {
-    if (!image) return null;
+const ImageModal = ({ isOpen, closeModal, imgUrl, imgAlt }) => {
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={onRequestClose}
-      style={customStyles}
-      contentLabel="Image Modal"
+      onRequestClose={closeModal}
+      style={{
+        overlay: {
+          backgroundColor: "rgba(19, 19, 19, 0.5)",
+        },
+        content: {
+          padding: "0",
+          height: "max-content",
+          overflow: "hidden",
+        },
+      }}
     >
-        <div className={css.modalImageContainer}>
-            <img className={css.modalImageCard}
-                src={image.urls.regular}
-                alt={image.alt_description}
-              />
-            <div className={css.dataImage}>
-               <h2>{image.description || image.alt_description || 'No Description'}</h2>
-               <p><strong>Author:</strong> {image.user.name}</p>
-               <p><strong>Likes:</strong> {image.likes}</p>    
-                  
-            </div>
-        </div>
+      <img className={css.imageModal} src={imgUrl} alt={imgAlt} />
     </Modal>
   );
 };

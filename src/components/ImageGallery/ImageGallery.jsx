@@ -1,19 +1,21 @@
+import ImageCard from "../ImageCard/ImageCard";
+import css from "./ImageGallery.module.css";
 
-import ImageCard from '../ImageCard/ImageCard';
-import css from './ImageGallery.module.css';
-
-const ImageGallery = ({ images, onImageClick }) => {
-  if (!images || images.length === 0) {
-    return null;
-  }
-
+const ImageGallery = ({ images, openModal }) => {
   return (
-    <ul className={css.list}>
-      {images.map(image => (
-        <li className={css.item} key={image.id} onClick={() => onImageClick(image)}>
-          <ImageCard src={image.urls.small} alt={image.alt_description} />
-        </li>
-      ))}
+    <ul className={css.imageList}>
+      {images.map(({ id, description, urls: { small, regular } }) => {
+        return (
+          <li key={id} className={css.imageItem}>
+            <ImageCard
+              small={small}
+              regular={regular}
+              description={description}
+              openModal={openModal}
+            />
+          </li>
+        );
+      })}
     </ul>
   );
 };
